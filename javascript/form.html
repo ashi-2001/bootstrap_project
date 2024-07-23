@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Registration Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <a href="#" class="form-link"
+        ><h5><u>Student Registration Form</u></h5></a
+      >
+      <form>
+        <table>
+          <tr>
+            <td><label for="firstname">First Name:</label></td>
+            <td>
+              <input
+                type="text"
+                id="firstname"
+                name="firstname"
+                placeholder="Enter your first name"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="lastname">Last Name:</label></td>
+            <td>
+              <input
+                type="text"
+                id="lastname"
+                name="lastname"
+                placeholder="Enter your last name"
+              />
+            </td>
+          </tr>
+          <!-- <tr>
+                    <td><label for="email">Email:</label></td>
+                    <td><input type="email" id="email" name="email" placeholder="it should contain @.."></td>
+                </tr> -->
+
+          <!-- <tr>
+                    <td><label>Gender:</label></td>
+                    <td>
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male" class="gender">Male</label>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female" class="gender">Female</label>
+                    </td>
+                </tr> -->
+          <tr>
+            <td><label for="dob">Date Of Birth:</label></td>
+            <td><input type="date" id="dob" name="dob" /></td>
+          </tr>
+          <!-- <tr>
+                    <td><label for="address">Address:</label></td>
+                    <td><textarea id="address" name="address" placeholder="Enter your address"></textarea></td>
+                </tr> -->
+          <tr>
+            <td><label for="city">City:</label></td>
+            <td><input type="text" id="city" name="city" /></td>
+          </tr>
+          <!-- <tr>
+                    <td><label for="pin">Area PIN:</label></td>
+                    <td><input type="text" id="pin" name="pin"></td>
+                </tr>
+                <tr>
+                    <td><label for="state">State:</label></td>
+                    <td><input type="text" id="state" name="state"></td>
+                </tr>
+                <tr>
+                    <td><label for="qualification">Qualification:</label></td>
+                    <td>
+                        <select id="qualification" name="qualification">
+                            <option value="">Select Qualification</option>
+                            <option value="cs">Computer Science</option>
+                            <option value="it">Information Technology</option>
+                            <option value="ca">Computer Architecture</option>
+                            <option value="tc">Tele Communication</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="specialization">Specialization:</label></td>
+                    <td>
+                        <input type="checkbox" id="cs" name="specialization" value="cs">
+                        <label for="cs" class="checkbox">Computer Science</label>
+                    </td>
+                    <td>    
+                        <input type="checkbox" id="it" name="specialization" value="it">
+                        <label for="it" class="checkbox">Information Technology</label>
+                    </td>
+                    <td>    
+                        <input type="checkbox" id="ca" name="specialization" value="ca">
+                        <label for="ca" class="checkbox">Computer Architecture</label>
+                    </td>
+                    <td>    
+                        <input type="checkbox" id="tc" name="specialization" value="tc">
+                        <label for="tc" class="checkbox">Tele Communication</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="password" id="password" name="password"></td>
+                </tr -->
+          <tr>
+            <td colspan="2" style="text-align: center">
+              <button type="submit" class="register-btn">Submit</button>
+            </td>
+
+          </tr>
+        </table>
+        <div id="mail"></div>
+      </form>
+
+    </div>
+    <!-- <input type="submit" onclick="showInput();"><br/>
+    <label>Your input: </label>
+    <p><span id='display'></span></p> -->
+    <script src="app.js"></script>
+  </body>
+</html>

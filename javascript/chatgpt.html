@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+ 
+<body>
+    <div class="container mt-5">
+        <!-- Step 1: User Details Form -->
+        <div id="user-form">
+            <h2>User Details</h2>
+            <form id="form1">
+                <div class="mb-3">
+                    <label for="f_name" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="f_name" name="f_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="l_name" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="l_name" name="l_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="place" class="form-label">Place</label>
+                    <input type="text" class="form-control" id="place" name="place" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="dob" name="dob" required>
+                </div>
+                <button type="button" class="btn btn-primary" id="next-btn">Next</button>
+            </form>
+        </div>
+ 
+        <!-- Step 2: Payment Details Form -->
+        <div id="payment-form" style="display: none;">
+            <h2>Payment Details</h2>
+            <form id="form2">
+                <div class="mb-3">
+                    <label for="payment_mode" class="form-label">Payment Mode</label>
+                    <select class="form-select" id="payment_mode" name="payment_mode" required>
+                        <option value="" disabled selected>Select Payment Mode</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="UPI">UPI</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="currency" class="form-label">Currency</label>
+                    <input type="text" class="form-control" id="currency" name="currency" required>
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Amount</label>
+                    <input type="number" class="form-control" id="amount" name="amount" required>
+                </div>
+                <div class="mb-3">
+                    <label for="interest_rate" class="form-label">Rate of Interest (5%)</label>
+                    <input type="number" class="form-control" id="interest_rate" name="interest_rate" value="5"
+                        step="0.1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="time" class="form-label">Time (Years)</label>
+                    <input type="number" class="form-control" id="time" name="time" required>
+                </div>
+                <button type="button" class="btn btn-primary" id="calculate-btn">Calculate</button>
+            </form>
+        </div>
+ 
+        <!-- Result and Email Template -->
+        <div id="result" style="display: none;">
+            <h2>Email Template</h2>
+            <pre id="email-template"></pre>
+        </div>
+    </div>
+ 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const data = {};
+ 
+            $('#next-btn').on('click', function () {
+                // Save user data
+                data.f_name = $('#f_name').val();
+                data.l_name = $('#l_name').val();
+                data.place = $('#place').val();
+                data.dob = $('#dob').val();
+ 
+                // Switch to the payment form
+                $('#user-form').hide();
+                $('#payment-form').show();
+            });
+ 
+            $('#calculate-btn').on('click', function () {
+                // Calculate monthly amount
+                const amount = parseFloat($('#amount').val());
+                const interestRate = parseFloat($('#interest_rate').val());
+                const time = parseInt($('#time').val(), 10);
+ 
+                const monthlyInterestRate = (interestRate / 100) / 12;
+                const numberOfPayments = time * 12;
+                const monthlyPayment = amount * (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments)));
+ 
+                // Add payment details to the data object
+                data.payment_mode = $('#payment_mode').val();
+                data.currency = $('#currency').val();
+                data.amount = amount;
+                data.interest_rate = interestRate;
+                data.time = time;
+                data.monthly_payment = monthlyPayment.toFixed(2);
+ 
+                // Generate email template
+                const emailTemplate = `
+Hello ${data.f_name} ${data.l_name},
+ 
+Thank you for your submission. Here are the details:
+ 
+**Place:** ${data.place}
+**Date of Birth:** ${data.dob}
+ 
+**Payment Mode:** ${data.payment_mode}
+**Currency:** ${data.currency}
+**Amount:** ${data.amount.toFixed(2)}
+**Rate of Interest:** ${data.interest_rate}%
+**Time Period:** ${data.time} Years
+ 
+**Monthly Payment:** ${data.currency} ${data.monthly_payment}
+ 
+Thank you for choosing our service.
+ 
+Best Regards,
+Your Company
+                `;
+ 
+                $('#email-template').text(emailTemplate);
+                $('#payment-form').hide();
+                $('#result').show();
+            });
+        });
+    </script>
+</body>
+ 
+</html>
+
